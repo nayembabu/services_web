@@ -15,11 +15,13 @@ class Login extends CI_Controller {
         $this->load->library('form_validation');
         $this->load->library('Upload');
         $this->load->library('pdf');
+        $this->load->model('home_model');
 	}
 
 	function index() {
+		$data['div_info'] = $this->home_model->getAllDivission();
 		$this->load->view('home/headr');
-		$this->load->view('home/home');
+		$this->load->view('home/home', $data);
 		$this->load->view('home/footr');
 	}
 
