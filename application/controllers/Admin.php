@@ -18,7 +18,11 @@ class Admin extends CI_Controller {
 	}
 
 	function index() {
-		$this->load->view('dashboard/index');
+		$data = array();
+		$data['title'] = 'Admin Dashboard';
+		$data['content'] = $this->load->view('dashboard/main-content', $data, true);
+		// load main dashboard 
+		$this->load->view('dashboard/index', $data);
 	}
 
 	function login() {
