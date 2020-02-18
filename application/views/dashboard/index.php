@@ -24,10 +24,10 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
-            <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Notifications   <span><i class="fas fa-envelope"></i></span>
-        </a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Notifications <span><i class="fas fa-envelope"></i></span>
+                    </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="#">Action</a>
                         <a class="dropdown-item" href="#">Another action</a>
@@ -41,14 +41,18 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">Link</a>
                 </li>
-              
+
 
             </ul>
 
         </div>
     </nav>
-<br><br>
+    <br><br>
     <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12"></div>
+        </div>
+
         <div class="row">
             <div class="col-sm-6 mx-auto">
                 <form action="">
