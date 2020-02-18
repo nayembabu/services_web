@@ -14,7 +14,7 @@ class Pub extends CI_Controller {
         $this->load->library('session');
         $this->load->library('form_validation');
         $this->load->library('Upload');
-        $this->load->library('pdf');
+        // $this->load->library('pdf');
 	}
 
 	function index() {
