@@ -18,7 +18,7 @@ class Admin extends CI_Controller {
 	}
 
 	function index() {
-		$this->load->view('dashboard/index');
+		echo "This is admin";
 	}
 
 	function login() {

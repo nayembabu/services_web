@@ -30,12 +30,13 @@ class Auth extends CI_Controller
 		if (!$this->ion_auth->logged_in())
 		{
 			// redirect them to the login page
-			redirect('auth/login', 'refresh');
+			redirect('login', 'refresh');
 		}
 		else if (!$this->ion_auth->is_admin()) // remove this elseif if you want to enable this for non-admins
 		{
 			// redirect them to the home page because they must be an administrator to view this
-			show_error('You must be an administrator to view this page.');
+			// show_error('You must be an administrator to view this page.');
+			redirect('pub');
 		}
 		else
 		{
@@ -81,16 +82,22 @@ class Auth extends CI_Controller
 				//if the login is successful
 				//redirect them back to the home page
 				$this->session->set_flashdata('message', $this->ion_auth->messages());
-				if ($this->ion_auth->login->user_group(array('admin'))) {
+
+				if ($this->ion_auth->is_admin()) {
 					redirect('admin');
+				}else {
+					redirect('pub');
 				}
+				// if ($this->ion_auth->login->user_group(array('admin'))) {
+				// 	redirect('admin');
+				// }
 			}
 			else
 			{
 				// if the login was un-successful
 				// redirect them back to the login page
 				$this->session->set_flashdata('message', $this->ion_auth->errors());
-				redirect('auth/login', 'refresh'); // use redirects instead of loading views for compatibility with MY_Controller libraries
+				redirect('/', 'refresh'); // use redirects instead of loading views for compatibility with MY_Controller libraries
 			}
 		}
 		else
@@ -127,7 +134,7 @@ class Auth extends CI_Controller
 		$this->ion_auth->logout();
 
 		// redirect them to the login page
-		redirect('auth/login', 'refresh');
+		redirect('/', 'refresh');
 	}
 
 	/**

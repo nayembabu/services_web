@@ -18,7 +18,7 @@ class Pub extends CI_Controller {
 	}
 
 	function index() {
-		echo "Work";
+		echo "This is Customer Service Management.....";
 	}
 
 	function login() {
