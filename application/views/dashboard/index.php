@@ -2,15 +2,17 @@
 <html lang="en">
 
 <head>
+    <base href="<?php echo base_url(); ?>">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
     <link href="include/img/logo/logo.png" rel="icon">
-    <title>RuangAdmin - Dashboard</title>
+    <title><?php echo $title; ?></title>
     <link href="include/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="include/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="include/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link href="include/css/ruang-admin.min.css" rel="stylesheet">
 </head>
 
@@ -18,15 +20,15 @@
     <div id="wrapper">
         <!-- Sidebar -->
         <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?php echo base_url(); ?>">
                 <div class="sidebar-brand-icon">
                     <img src="include/img/logo/logo2.png">
                 </div>
-                <div class="sidebar-brand-text mx-3">RuangAdmin</div>
+                <div class="sidebar-brand-text mx-3">Dashboard</div>
             </a>
             <hr class="sidebar-divider my-0">
             <li class="nav-item active">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="<?php echo base_url(); ?>">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -35,52 +37,22 @@
                 Features
             </div>
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap" aria-expanded="true" aria-controls="collapseBootstrap">
-                    <i class="far fa-fw fa-window-maximize"></i>
-                    <span>Bootstrap UI</span>
-                </a>
-                <div id="collapseBootstrap" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Bootstrap UI</h6>
-                        <a class="collapse-item" href="alerts.html">Alerts</a>
-                        <a class="collapse-item" href="buttons.html">Buttons</a>
-                        <a class="collapse-item" href="dropdowns.html">Dropdowns</a>
-                        <a class="collapse-item" href="modals.html">Modals</a>
-                        <a class="collapse-item" href="popovers.html">Popovers</a>
-                        <a class="collapse-item" href="progress-bar.html">Progress Bars</a>
-                    </div>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="forms.html">
+                <a class="nav-link" href="admin">
                     <i class="fab fa-fw fa-wpforms"></i>
-                    <span>Forms</span>
+                    <span>Home</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTable" aria-expanded="true" aria-controls="collapseTable">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Tables</span>
-                </a>
-                <div id="collapseTable" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Tables</h6>
-                        <a class="collapse-item" href="simple-tables.html">Simple Tables</a>
-                        <a class="collapse-item" href="datatables.html">DataTables</a>
-                    </div>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="ui-colors.html">
-                    <i class="fas fa-fw fa-palette"></i>
-                    <span>UI Colors</span>
+                <a class="nav-link" href="notification">
+                    <i class="fab fa-fw fa-wpforms"></i>
+                    <span>Request</span>
                 </a>
             </li>
             <hr class="sidebar-divider">
             <div class="sidebar-heading">
-                Examples
+                Others
             </div>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePage" aria-expanded="true" aria-controls="collapsePage">
                     <i class="fas fa-fw fa-columns"></i>
                     <span>Pages</span>
@@ -94,15 +66,7 @@
                         <a class="collapse-item" href="blank.html">Blank Page</a>
                     </div>
                 </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="charts.html">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Charts</span>
-                </a>
-            </li>
-            <hr class="sidebar-divider">
-            <div class="version" id="version-ruangadmin"></div>
+            </li> -->
         </ul>
         <!-- Sidebar -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -139,39 +103,22 @@
                                 <h6 class="dropdown-header">
                                     Alerts Center
                                 </h6>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-primary">
-                                            <i class="fas fa-file-alt text-white"></i>
+
+                                <?php foreach ($notifications as $item) : ?>
+                                    <a class="dropdown-item d-flex align-items-center" href="#">
+                                        <div class="mr-3">
+                                            <div class="icon-circle bg-primary">
+                                                <i class="fas fa-file-alt text-white"></i>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 12, 2019</div>
-                                        <span class="font-weight-bold">A new monthly report is ready to download!</span>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-success">
-                                            <i class="fas fa-donate text-white"></i>
+                                        <div>
+                                            <div class="small text-gray-500"><?php echo $item->created_at; ?></div>
+                                            <span class="font-weight-bold"><?php echo $item->title; ?></span>
                                         </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 7, 2019</div>
-                                        $290.29 has been deposited into your account!
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-warning">
-                                            <i class="fas fa-exclamation-triangle text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 2, 2019</div>
-                                        Spending Alert: We've noticed unusually high spending for your account.
-                                    </div>
-                                </a>
+                                    </a>
+
+
+                                <?php endforeach; ?>
                                 <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
                             </div>
                         </li>
@@ -282,52 +229,57 @@
                 <!-- Topbar -->
 
                 <!-- Container Fluid-->
-                <div class="container-fluid" id="container-wrapper">
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="./">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
-                        </ol>
-                    </div>
+                <!-- main content -->
 
-                    <!-- main content -->
+                <?php echo $content; ?>
 
-                    <?php echo $content; ?>
-                    <!-- // main content ended here -->
+                <!-- // main content ended here -->
+
+                <!--Row-->
 
 
-                    <!--Row-->
 
-
-                </div>
                 <!---Container Fluid-->
-            </div>
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>copyright &copy; 2019 - developed by
-                            <b><a href="javascript:void(0);" target="_blank">Nayem & Jashim</a></b>
-                        </span>
+
+                <!-- Footer -->
+                <footer class="sticky-footer bg-white">
+                    <div class="container my-auto">
+                        <div class="copyright text-center my-auto">
+                            <span>copyright &copy; 2019 - developed by
+                                <b><a href="javascript:void(0);" target="_blank">Nayem & Jashim</a></b>
+                            </span>
+                        </div>
                     </div>
-                </div>
-            </footer>
-            <!-- Footer -->
+                </footer>
+                <!-- Footer -->
+            </div>
         </div>
-    </div>
 
-    <!-- Scroll to top -->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
+        <!-- Scroll to top -->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
 
-    <script src="include/vendor/jquery/jquery.min.js"></script>
-    <script src="include/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="include/vendor/jquery-easing/jquery.easing.min.js"></script>
-    <script src="include/js/ruang-admin.min.js"></script>
-    <script src="include/vendor/chart.js/Chart.min.js"></script>
-    <script src="include/js/demo/chart-area-demo.js"></script>
+        <script src="include/vendor/jquery/jquery.min.js"></script>
+        <script src="include/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="include/vendor/jquery-easing/jquery.easing.min.js"></script>
+        <script src="include/js/ruang-admin.min.js"></script>
+        <!-- Page level plugins -->
+        <script src="include/vendor/datatables/jquery.dataTables.min.js"></script>
+        <script src="include/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+        <script src="include/vendor/chart.js/Chart.min.js"></script>
+        <script src="include/js/demo/chart-area-demo.js"></script>
+
+        <!-- Page level custom scripts -->
+        <script>
+            $(document).ready(function() {
+                $('#dataTable').DataTable(); // ID From dataTable 
+                $('#dataTableHover').DataTable(); // ID From dataTable with Hover
+            });
+        </script>
+
+
 </body>
 
 </html>
