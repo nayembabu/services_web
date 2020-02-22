@@ -9,7 +9,14 @@
         $(".select_2").select2({
         	width: '90%'
         });	
-     </script>
+
+        $('.datePick').datepicker({
+	        format: 'dd-mm-yyyy',
+	        maxDate: 0,        	
+        });
+
+        
+    </script>
 
 </body>
 </html>
