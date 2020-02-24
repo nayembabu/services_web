@@ -146,6 +146,8 @@ $totalAmnt_s = array_sum($amnt_array);
 
 <script type="text/javascript">
 
+	var argetRate = 0;
+
 	getRequest();
 
 	var nid_slip_form = '<div class="form-row"><div class="form-group col-md-6"><label for="inputEmail4"> Number </label><input type="text" class="form-control slip_numbr" id="inputEmail4" placeholder="Type Number"></div><div class="form-group col-md-6"><label for="inputPassword4"> Birth Date </label><input type="text" class="form-control birth_date_f datePicker" id="inputPassword4" placeholder="Type Birth Date"></div></div><div class="form-group"><label for="inputAddress"> Person Name </label><input type="text" class="form-control persn_name_s" id="inputAddress" placeholder="Type Full Name of Person"></div>';
@@ -234,7 +236,7 @@ $totalAmnt_s = array_sum($amnt_array);
 					if (requ_data[i].img_upload_url == null) {
 						img_checker = 'Wait for Processing';
 					}else {
-						img_checker = '<a href="'+requ_data[i].img_upload_url+'" download > Download </a>'
+						img_checker = '<a href="'+requ_data[i].img_upload_url+'" download class="Down_btn" Dta_idRes="'+requ_data[i].requ_uniq_iiiid+'"> Download </a>'
 					}
 
 					full_data += '<tr><td> '+sl+' </td><td> '+requ_data[i].requ_emar_stats+' </td><td> '+requ_data[i].requ_type+' </td><td> '+requ_data[i].query_numbr+' </td><td> '+requ_data[i].query_name_des+' </td><td> '+requ_data[i].requ_birth+' </td><td> '+requesTime_f+' </td><td> '+stsus+' </td><td> '+img_checker+' </td><td> '+UploadTime_f+' </td></tr>';
@@ -260,6 +262,7 @@ $('.services_list_name').change(function() {
 		data: '',
 		dataType: 'json',
 		success: function (requ_data) { 
+			argetRate = requ_data.argent_rate;
 			$('.App_Type_ssss').html('<div class="form-check form-check-inline"><input class="form-check-input normal_rate" type="radio" name="App_type" App_Attr="Normal" id="" value="'+requ_data.service_rate+'"><label class="form-check-label" for=""> Normal </label></div><div class="form-check form-check-inline"><input class="form-check-input argent_rate" type="radio" name="App_type" App_Attr="Argent" id="" value="'+requ_data.argent_rate+'"><label class="form-check-label" for=""> Argent </label></div><p style="border: 1px solid black;"> Normal Rate = '+requ_data.service_rate+' and Argent rate = '+requ_data.argent_rate+' <br>Normal Time = '+requ_data.normal_time_ss+' and Argent Time = '+requ_data.arget_rate_time_scs+'</p>');
 		}
 	})
@@ -282,23 +285,6 @@ $(document).on('change', '.services_opt_s', function() {
 				$('.erro_show').html('Hei! Please Type Slip Number and argent or normal...');
 			}else {
 				saveNewReques_ss();
-				/*$.ajax({
-					url: 'pub/insert_new_request',
-					method: 'POST',
-					data: {
-						slip_num: slip_numbr,
-						br_date: birth_date_f,
-						per_name: persn_name_s,
-						servicesss_rate: servicesss_rate
-					},
-					success: function (requ_data) { 
-						$('#requModel').modal('hide');
-						getRequest();
-						balanceQuery_s();
-						$('.input_form_tag').html('');
-					$('.submit_btn_ss').css('display', 'none');
-					}
-				})*/
 			}
 		})
 	}else {
@@ -329,11 +315,14 @@ $(document).on('change', '.services_opt_s', function() {
 					App_type_text: App_type_text,
 					services_opt_sss: services_opt_sss,
 				},
-				success: function (requ_data) { 
+				success: function() { 
 					$('#requModel').modal('hide');
 					getRequest();
 					balanceQuery_s();
+					$('.App_Type_ssss').html('');
 					$('.input_form_tag').html('');
+					$('.nid_sl_type').html('');
+					$('.services_list_name').val('');
 				$('.submit_btn_ss').css('display', 'none');
 				}
 			})
@@ -356,7 +345,7 @@ balanceQuery_s();
 				var amount_ttl_cost = balance_data.servic_cost;		   	
 		   		now_ttl_balance = amount_ttl_pay - amount_ttl_cost;
 
-		   		if (now_ttl_balance != 0) {
+		   		if (now_ttl_balance > argetRate) {
 		   			$('.query_btn_ss').html('<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#requModel">New Request</button>');
 		   		}else {
 		   			$('.query_btn_ss').html(' ');
@@ -397,5 +386,18 @@ balanceQuery_s();
 		})
 	}
 
+	$(document).on('click', '.Down_btn', function() {
+		var thisRequIdd = $(this).attr('Dta_idRes');
+		$.ajax({
+			url: 'pub/saveDownloadStatus',
+			method: 'post',
+			data: {
+				thisRequIdd: thisRequIdd,
+			},
+		   success: function() {
+				getRequest();
+			}
+		})
+	})
 
 </script>

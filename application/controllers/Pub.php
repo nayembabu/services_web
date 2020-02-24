@@ -61,29 +61,34 @@ class Pub extends CI_Controller {
 		$now_date					= date('Y-m-d', time());
 		$requUser 					= $this->ion_auth->user()->row()->cus_iniq_id;
 
-		$full_data = array(
-				'cus_inq_id' 		=> $requUser, 
-				'query_numbr' 		=> $slip_num, 
-				'requ_birth' 		=> $br_date, 
-				'query_name_des' 	=> $per_name, 
-				'requ_time_stamp' 	=> $now_time, 
-				'this_date' 		=> $now_date, 
-				'service_unq_idd' 	=> $services_list_name, 
-				'requ_emar_stats' 	=> $App_type_text, 
-				'requ_type' 		=> $services_opt_sss
-			);
-		$last_insrt = $this->pub_model->insert_new_data($full_data);
+		$check = $this->pub_model->CheckThisRequNumber($slip_num, $requUser);
 
-		$c_data = array(
-				'services_uniq_iiddd' 		=> $last_insrt, 
-				'this_service_amount' 		=> $servcs_rate, 
-				'cus_user_unique_iddid' 	=> $requUser, 
-				'this_times' 				=> $now_time, 
-				'cost_this_datess' 			=> $now_date, 
-				'services_info_idiidi' 		=> $services_list_name, 
-				'app_type_text' 			=> $App_type_text 
-			);
-		$this->pub_model->insert_new_requ_cost($c_data);
+		if (empty($check)) {
+			$full_data = array(
+					'cus_inq_id' 		=> $requUser, 
+					'query_numbr' 		=> $slip_num, 
+					'requ_birth' 		=> $br_date, 
+					'query_name_des' 	=> $per_name, 
+					'requ_time_stamp' 	=> $now_time, 
+					'this_date' 		=> $now_date, 
+					'service_unq_idd' 	=> $services_list_name, 
+					'requ_emar_stats' 	=> $App_type_text, 
+					'requ_type' 		=> $services_opt_sss
+				);
+			$last_insrt = $this->pub_model->insert_new_data($full_data);
+
+			$c_data = array(
+					'services_uniq_iiddd' 		=> $last_insrt, 
+					'this_service_amount' 		=> $servcs_rate, 
+					'cus_user_unique_iddid' 	=> $requUser, 
+					'this_times' 				=> $now_time, 
+					'cost_this_datess' 			=> $now_date, 
+					'services_info_idiidi' 		=> $services_list_name, 
+					'app_type_text' 			=> $App_type_text 
+				);
+			$this->pub_model->insert_new_requ_cost($c_data);
+		}
+		exit();
 	}
 
 	function services_balance_query() {
@@ -124,6 +129,12 @@ class Pub extends CI_Controller {
 			'entry_time_sss' 			=> $this_timeee 
 		);
 		$this->pub_model->add_Advance_Pay($pay_data);
+	}
+
+	function saveDownloadStatus() {
+		$thisRequIdd = $this->input->post('thisRequIdd');
+			$data_ss = array( 'download_status' => '1', );
+		$this->pub_model->DownloadComplete($thisRequIdd, $data_ss);
 	}
 }
 

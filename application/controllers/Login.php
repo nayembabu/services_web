@@ -77,7 +77,8 @@ class Login extends CI_Controller {
 				'password'			=> $hash_pass,
 				'cus_iniq_id'		=> $last_iniq_id,
 				'u_name'			=> $usr_name,
-				'phone'				=> $mobile_no
+				'phone'				=> $mobile_no,
+				'active'			=> '0'
 			);
 		$this->home_model->insert_user_tbl_data($u_data);
 		redirect('/');

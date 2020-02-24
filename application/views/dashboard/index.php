@@ -2,78 +2,122 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Bootstrap 4 -->
-    <link rel="stylesheet" href="include/bootstrap4/css/bootstrap.min.css">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="include/fontawesome5/css/fontawesome.min.css">
-    <!-- jQuery UI css -->
-    <link rel="stylesheet" href="include/jqueryui/jquery-ui.min.css">
-    <!-- custom css -->
-    <link rel="stylesheet" href="include/custom.css">
-    <title>Document</title>
+  <base href="<?php echo base_url(); ?>">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link href="include/template_style/img/logo/logo.png" rel="icon">
+  <title>  </title>
+  <link href="include/template_style/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="include/template_style/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link href="include/template_style/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+  <link href="include/template_style/css/ruang-admin.min.css" rel="stylesheet">
+
+
+
+
+  
+  <script src="include/template_style/vendor/jquery/jquery.min.js"></script>
 </head>
 
-<body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Dashboard</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Notifications <span><i class="fas fa-envelope"></i></span>
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-
-
-            </ul>
-
+<body id="page-top">
+  <div id="wrapper">
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+        <div class="sidebar-brand-icon">
+          <img src="include/template_style/img/logo/logo2.png">
         </div>
-    </nav>
-    <br><br>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12"></div>
+        <div class="sidebar-brand-text mx-3">  </div>
+      </a>
+      <hr class="sidebar-divider my-0">
+      <li class="nav-item active">
+        <a class="nav-link" href="admin">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>Dashboard</span></a>
+      </li>
+      <hr class="sidebar-divider">
+      <div class="sidebar-heading">
+         Sidebar Head
+      </div>
+
+      <li class="nav-item">
+        <a class="nav-link" href="forms.html">
+          <i class="fab fa-fw fa-wpforms"></i>
+          <span>Forms</span>
+        </a>
+      </li>
+
+    <!--
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap"
+          aria-expanded="true" aria-controls="collapseBootstrap">
+          <i class="far fa-fw fa-window-maximize"></i>
+          <span>Bootstrap UI</span>
+        </a>
+        <div id="collapseBootstrap" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Bootstrap UI</h6>
+            <a class="collapse-item" href="alerts.html">Alerts</a>
+          </div>
         </div>
-
-        <div class="row">
-            <div class="col-sm-6 mx-auto">
-                <form action="">
-
-                    <div class="form-group">
-                        <label for="form number">Slip Number</label>
-                        <input type="text" name="slipNo" id="" class="form-control">
-                    </div>
-                    <button class="btn btn-primary" type="submit">submit</button>
-                </form>
-            </div>
-        </div>
-    </div>
+      </li>
+  -->
 
 
 
-    <!-- jQuery -->
-    <script src="include/jquery3.min.js"></script>
-    <script src="include/jqueryui/jquery-ui.min.js"></script>
-    <!-- Bootstrap js -->
-    <script src="include/bootstrap4/js/bootstrap.min.js"></script>
-</body>
 
-</html>
+
+      <hr class="sidebar-divider">
+    </ul>
+    <!-- Sidebar -->
+    <div id="content-wrapper" class="d-flex flex-column">
+      <div id="content">
+        <!-- TopBar -->
+        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow-sm">
+          <button id="sidebarToggleTop" class="btn btn-link rounded-circle mr-3">
+            <i class="fa fa-bars"></i>
+          </button>
+
+
+
+          <ul class="navbar-nav ml-auto">
+            
+
+
+
+
+
+            
+
+
+            
+            
+            <div class="topbar-divider d-none d-sm-block"></div>
+            <li class="nav-item dropdown no-arrow">
+              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <img class="img-profile rounded-circle" src="include/template_style/img/boy.png" style="max-width: 60px">
+                <span class="ml-2 d-none d-lg-inline text-gray-600 small">Maman Ketoprak</span>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                <a class="dropdown-item" href="#">
+                  <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Profile
+                </a>
+                <a class="dropdown-item" href="#">
+                  <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Settings
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="auth/logout">
+                  <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Logout
+                </a>
+              </div>
+            </li>
+          </ul>
+        </nav>
+        <!-- Topbar -->

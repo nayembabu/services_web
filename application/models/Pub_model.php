@@ -67,4 +67,20 @@ class Pub_model extends CI_Model {
 	function add_Advance_Pay($pay_data) {
 		$this->db->insert('advnc_pay_query', $pay_data);
 	}
+
+	function CheckThisRequNumber($slip_num, $requUser) {
+		$sqlWhere = array(
+					'query_numbr' => $slip_num,
+					'cus_inq_id'  => $requUser,
+					'status' 	  => '0',
+					);
+		$this->db->where($sqlWhere);
+		$sql = $this->db->get('nid_request');
+		return $sql->row();
+	}
+
+	function DownloadComplete($thisRequIdd, $data_ss) {
+		$this->db->where('requ_uniq_iiiid', $thisRequIdd);
+		$this->db->update('nid_request', $data_ss);
+	}
 }
