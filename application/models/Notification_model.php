@@ -40,9 +40,9 @@ class Notification_model extends CI_Model
         return $data;
     }
 
-    function upload_nid($id, $data)
+    function nid_upload($data)
     {
-        $this->db->set('img_upload_url', $data);
-        $this->db->insert('nid_request')->where('id', $id);
+        dd($data);
+        
     }
 }

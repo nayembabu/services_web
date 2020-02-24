@@ -8,7 +8,8 @@ class Notification extends CI_Controller
     {
         parent::__construct();
         $this->load->model('notification_model');
-        $this->load->helpers('date');
+        $this->load->helper('date');
+        $this->load->helper('dd');
     }
 
     public function index()
@@ -38,18 +39,18 @@ class Notification extends CI_Controller
 
     // Upload image
 
-    public function upload_img($id)
+    public function upload()
     {
-        if (isset($_FILES['image_file']['name'])) {
-            $config['upload_path'] = './upload/nid';
-            $config['allowed_types'] = 'jpg|png|jpeg';
-            $this->load->library('upload', $config);
+        $config['upload_path'] = '../../upload';
+        $config['allowed_types'] = 'gif|png|jpeg|jpg';
 
-            if (!$this->upload->do_upload('image_file')) {
-                echo $this->upload->display_errors();
-            } else {
-                $this->notification_model->upload_nid('image_file', $id);
-            }
+        $this->load->library('upload', $config);
+
+        if (! $this->upload->do_upload('nid')) {
+            echo $this->upload->display_errors();
+        } else {
+            $data = $this->upload->data();
+            dd($data);
         }
     }
 }

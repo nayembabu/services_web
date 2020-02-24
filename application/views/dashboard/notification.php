@@ -63,7 +63,7 @@
                                         ?> </td>
 
                                     <td>
-                                        <a class="btn btn-primary btn-sm" data-toggle="modal" data-target="#uploadModal" type="button" href="notification/show/<?php echo $item->id; ?>" data-id="<?php echo $item->id;?>" id="uploadBtn"> Upload </a>
+                                        <a class="btn btn-primary btn-sm" data-toggle="modal" data-target="#uploadModal" type="button" href="notification/show/<?php echo $item->id; ?>" data-id="<?php echo $item->id; ?>" id="uploadBtn"> Upload </a>
 
                                     </td>
                                     <td>
@@ -105,7 +105,7 @@
             <form action="" enctype="multipart/form-data" id="uploadImgForm">
                 <div class="modal-body">
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="image_file" name="image_file">
+                        <input type="file" class="custom-file-input" id="customFile" name="nid">
                         <label class="custom-file-label" for="customFile">Choose file</label>
                     </div>
                 </div>
@@ -122,5 +122,33 @@
 <!-- // Upload NID Model -->
 
 <script>
-   
+    $(document).ready(function() {
+        $('#uploadBtn').on('click', function() {
+            var id = $(uploadBtn).attr('data-id');
+            // console.log(id);
+            $('#uploadImgForm').on('submit', function() {
+                // var img = $('#image_file').val();
+                // console.log(img);
+                var formData = new FormData();
+                alert(formData);
+                exit();
+                // $.ajax({
+                //     url: 'notification/upload',
+                //     type: "post",
+                //     data: new FormData(this),
+                //     processData: false,
+                //     contentType: false,
+                //     cache: false,
+                //     async: false,
+                //     success: function() {
+
+                //     }
+                // });
+
+            });
+        });
+
+
+
+    });
 </script>

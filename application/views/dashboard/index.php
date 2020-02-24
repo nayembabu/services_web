@@ -14,6 +14,8 @@
     <link href="include/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="include/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link href="include/css/ruang-admin.min.css" rel="stylesheet">
+    <!-- jQuery  -->
+    <script src="include/vendor/jquery/jquery.min.js"></script>
 </head>
 
 <body id="page-top">
@@ -113,7 +115,7 @@
                                         </div>
                                         <div>
                                             <div class="small text-gray-500"><?php echo $item->created_at; ?></div>
-                                            <span class="font-weight-bold"><?php echo $item->title; ?></span>
+                                            <span class="font-weight-bold"><?php echo $item->query_numbr; ?></span>
                                         </div>
                                     </a>
 
@@ -226,20 +228,12 @@
                         </li>
                     </ul>
                 </nav>
-                <!-- Topbar -->
+                <!-- Topbar  end -->
 
                 <!-- Container Fluid-->
-                <!-- main content -->
-
                 <?php echo $content; ?>
 
-                <!-- // main content ended here -->
-
-                <!--Row-->
-
-
-
-                <!---Container Fluid-->
+                <!---Container Fluid  End here-->
 
                 <!-- Footer -->
                 <footer class="sticky-footer bg-white">
@@ -260,7 +254,7 @@
             <i class="fas fa-angle-up"></i>
         </a>
 
-        <script src="include/vendor/jquery/jquery.min.js"></script>
+
         <script src="include/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
         <script src="include/vendor/jquery-easing/jquery.easing.min.js"></script>
         <script src="include/js/ruang-admin.min.js"></script>
