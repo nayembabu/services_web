@@ -11,8 +11,13 @@ class Home_model extends CI_Model {
         $this->load->database();
 	}
 
-	function getAllDivission() {
-		$sql = $this->db->get('divisions');
-		return $sql->result();
+	function insert_cus_data($s_data) {
+		$this->db->insert('customer_full',$s_data);
+		    return $this->db->insert_id();
 	}
+
+	function insert_user_tbl_data($u_data) {
+		$this->db->insert('users', $u_data);		
+	}
+
 }
