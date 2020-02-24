@@ -32,12 +32,11 @@
                             <tr>
                                 <th> ID </th>
                                 <th> User Name </th>
-                                <th> User Mobile </th>
                                 <th> User UDC Name </th>
-                                <th> District </th>
-                                <th> Upazilla </th>
-                                <th> Email No </th>
-                                <th> Full Address </th>
+                                <th> TrID </th>
+                                <th> Sender No </th>
+                                <th> Receive No </th>
+                                <th> Amounts </th>
                                 <th> Action </th>
                             </tr>
                         </thead>
@@ -65,15 +64,13 @@
 
         <script>
 
-            var fileUploadInputBtn = '<input type="file" class="form-control-file UpldFileThis" id="" name="file">';
-
             listRecords();
 
             function listRecords(){
                 var html='';
                 var sl = 1;
                 $.ajax({
-                    url: 'admin/getAllReqUserForApprove',
+                    url: 'admin/getAllAdvancePayment',
                     method: 'GET',
                     dataType: 'json',
                     success: function(data){
@@ -84,13 +81,12 @@
                             html += '<tr class="data_tr_row">' +
                                         '<td>' + sl +  '</td>' +
                                         '<td>' + data[i].cus_full_name + '</td>' +
-                                        '<td>' + data[i].cus_mobile_no + '</td>' +
                                         '<td>' + data[i].un_bn_name + '</td>' +
-                                        '<td>' + data[i].dis_bn_name + '</td>' +
-                                        '<td>' + data[i].up_bn_name + '</td>' +
-                                        '<td>' + data[i].cus_email + '</td>' +
-                                        '<td>' + data[i].parmanent_addres + '</td>' +
-                                        '<td>  <button type="button" dataID="'+data[i].id+'" class="btn btn-success btn-xs SucBtn_ss" title="Success" id="inlineFormCustomSelect" ><i class="fa fa-check"></i> </button>                 <button type="button" ThisdataID="'+data[i].id+'" UserCusUniqIDD="'+data[i].cus_iid+'" class="btn btn-danger btn-xs delUser_Btn" title="Reject" id="inlineFormCustomSelect" ><i class="fa fa-times"></i> </button></td>' +
+                                        '<td>' + data[i].send_tr_iidd + '</td>' +
+                                        '<td>' + data[i].pay_from_num + '</td>' +
+                                        '<td>' + data[i].advnc_pay_receive_no + '</td>' +
+                                        '<td>' + data[i].send_tk_amount + '</td>' +
+                                        '<td>  <button type="button" dataID="'+data[i].advnc_pay_query_iidd+'" class="btn btn-success btn-xs SucBtn_ss" title="Success" id="inlineFormCustomSelect" ><i class="fa fa-check"></i> </button>                 <button type="button" ThisdataID="'+data[i].advnc_pay_query_iidd+'" class="btn btn-danger btn-xs delUser_Btn" title="Reject" id="inlineFormCustomSelect" ><i class="fa fa-times"></i> </button></td>' +
                                      ' </tr>'
                         }
                         $('.listResult').html(html);
@@ -102,7 +98,7 @@
             $(document).on('click', '.SucBtn_ss', function() {
                 var ThisUser_rqs = $(this).attr('dataID');
                 $.ajax({
-                    url: 'admin/UserApproved_ss?ThisUser_rqs='+ThisUser_rqs,
+                    url: 'admin/AdvancePaymentApprove?ThisUser_rqs='+ThisUser_rqs,
                     type: 'GET',
                     data: '',
                     success: function(response){ 
@@ -112,10 +108,9 @@
             })
 
             $(document).on('click', '.delUser_Btn', function() {
-                var ThisUser_rqs_idd = $(this).attr('ThisdataID');
-                var UserCusUniqIDD = $(this).attr('UserCusUniqIDD');
+                var ThisPay_rqs_idd = $(this).attr('ThisdataID');
                 $.ajax({
-                    url: 'admin/UserReject_ss?ThisUser_rqs='+ThisUser_rqs_idd+'&CusUniq='+UserCusUniqIDD,
+                    url: 'admin/AdvPayReject_ss?ThisPay_rqs='+ThisPay_rqs_idd,
                     type: 'GET',
                     data: '',
                     success: function(response){ 

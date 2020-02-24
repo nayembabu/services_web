@@ -35,7 +35,7 @@
         <div class="modal-body">
 
             <input type="text" name="identity" placeholder="Type Your Username">
-            <input type="text" name="password" placeholder="Type Your Password">
+            <input type="password" name="password" placeholder="Type Your Password">
             
           
 
@@ -72,34 +72,34 @@
 
           <div class="form-group">
             <label for="">Full Name</label>
-            <input type="text" class="form-control" id="" name="full_name" placeholder="Type Full Name">
+            <input required="required" type="text" class="form-control" id="" name="full_name" placeholder="Type Full Name">
           </div>
 
           <div class="form-group">
             <label for="">User Name</label>
-            <input type="text" class="form-control" id="" name="usr_name" placeholder="Type User Name No Space">
+            <input type="text" required="required" class="form-control" id="" name="usr_name" placeholder="Type User Name No Space">
           </div>
 
           <div class="form-group">
             <label for="">Email address</label>
-            <input type="email" class="form-control" name="email_no" id="" placeholder="Type Email ">
+            <input type="email" required="required" class="form-control" name="email_no" id="" placeholder="Type Email ">
           </div>
 
           <div class="form-group">
             <label for="">Password</label>
-            <input type="password" class="form-control mobile_no_dig" name="password" id="" placeholder="name@example.com">
+            <input type="password" required="required" class="form-control mobile_no_dig" name="password" id="" placeholder="name@example.com">
           </div>
 
           <div class="form-group">
             <label for="">Mobile Number</label>
-            <input type="text" name="mobile_no" class="form-control mobile_no_dig" id="" placeholder="name@example.com">
+            <input type="text" required="required" name="mobile_no" class="form-control mobile_no_dig" id="" placeholder="name@example.com">
           </div>
 
         <div class="" style="border: 1px solid black; margin-left: 45px; border-radius: 10px;">
             <label for="" style="margin-left: 10px;">আপনি কোন ইউনিয়নের উদ্যোক্তা</label>
             <div class="form-group slct_opt">
               <label for="">Select Division</label>
-              <select class="form-control select_2 div_select" name="div_iidd" id="">
+              <select class="form-control select_2 div_select" required="required" name="div_iidd" id="">
                 <option value=""> Select..... </option>
               <?php foreach ($div_info as $div) { ?>
                 <option value="<?php echo $div->div_id; ?>"> <?php echo $div->div_bn_name; ?> </option>
@@ -109,14 +109,14 @@
 
             <div class="form-group slct_opt">
               <label for="">Select District</label>
-              <select class="form-control select_2 dis_select" name="dis_idi" id="">
+              <select class="form-control select_2 dis_select" required="required" name="dis_idi" id="">
                 <option> Select.. </option>
               </select>
             </div>
               
             <div class="form-group slct_opt">
               <label for="">Select Upazilla</label>
-              <select class="form-control select_2 upz_select" name="up_iddii" id="">
+              <select class="form-control select_2 upz_select" required="required" name="up_iddii" id="">
                 <option> Select.. </option>
               </select>
             </div>
@@ -131,7 +131,7 @@
 
           <div class="form-group">
             <label for="">Full Address</label>
-            <input type="text" class="form-control" name="full_address" id="" placeholder="name@example.com">
+            <input type="text" class="form-control" required="required" name="full_address" id="" placeholder="name@example.com">
           </div>
 
         </div>

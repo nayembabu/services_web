@@ -15,6 +15,9 @@ class Admin extends CI_Controller {
         $this->load->library('form_validation');
         $this->load->library('Upload');
         $this->load->model('admin_model');
+        $this->load->library('Ion_auth');
+        $this->load->model('settings_model');
+        $this->load->model('ion_auth_model');
         // $this->load->library('pdf');
 	}
 
@@ -74,9 +77,9 @@ class Admin extends CI_Controller {
         if ($this->upload->do_upload('file')) {
             $path = $this->upload->data();
             // Upload in Folder
-            $img_url = "uplode_img/requ_upload_img/" . $config['file_name'];
+            $img_urlName = "uplode_img/requ_upload_img/" . $config['file_name'];
             $data = array(
-                'img_upload_url' 		=> $img_url,
+                'img_upload_url' 		=> $img_urlName,
                 'status'				=> '1',
                 'img_uplaod_time'		=>	$thisTimestamp_ss,
                 'upload_this_date_ss'	=>	$now_this_date,
@@ -104,5 +107,63 @@ class Admin extends CI_Controller {
 						'group_id'	=>	'2',	 
 					);
 		$this->admin_model->UserInsertGroup($f_data_ss);
+	}
+
+	function UserReject_ss() {
+		$ThisUser_rqs = $this->input->get('ThisUser_rqs');
+		$CusUniq = $this->input->get('CusUniq');
+		$this->admin_model->UserDeleteFromUser($ThisUser_rqs);
+		$this->admin_model->UserDeleteFromCus_full($CusUniq);
+	}
+
+	function FormReject_s() {
+		$ThisRqs_iddi = $this->input->get('ThisRqs_iddi');
+		$up_data = array(
+					'status' => '2', 
+				);
+		$this->admin_model->DeleteRequestNomber($up_data, $ThisRqs_iddi);
+		$this->admin_model->DeleteCostforThisSer($ThisRqs_iddi);
+	}
+
+	function getAllAdvance() {
+		$this->load->view('dashboard/index');
+		$this->load->view('dashboard/advance_pay');
+		$this->load->view('dashboard/footer');		
+	}
+
+	function getAllAdvancePayment() {
+		$data = $this->admin_model->getAdvancePay();
+		echo json_encode($data);		
+	}
+
+	function AdvancePaymentApprove() {
+		$ThisUser_rqs = $this->input->get('ThisUser_rqs');
+		$AdminUser = $this->ion_auth->user()->row()->cus_iniq_id;
+		$AdvancePayInfo = $this->admin_model->getAdvancePayByID($ThisUser_rqs);
+
+		$f_data = array(
+					'payable_amount' 			=> $AdvancePayInfo->send_tk_amount, 
+					'cus_user_uniq_iidd' 		=> $AdvancePayInfo->user_uniq_auto_iddi,
+					'confirm_admin_uniq_a_iddd' => $AdminUser,
+					'confirms_timesss' 			=> time(),
+					'advance_query_iiddd' 		=> $AdvancePayInfo->advnc_pay_query_iidd,
+					'payable_tr_idddd' 			=> $AdvancePayInfo->send_tr_iidd,
+				);
+		$this->admin_model->InsertCusPays($f_data);
+
+		$c_datas = array(
+						'confirm_status' 	=> '1',
+						'confirm_timestamp' => time(),
+						'confirm_user_iidd' => $AdminUser, 
+					);
+		$this->admin_model->UpdateAdvancePayTbl($c_datas, $ThisUser_rqs);
+	}
+
+	function AdvPayReject_ss() {
+		$ThisUser_rqs = $this->input->get('ThisPay_rqs');
+		$c_datas = array(
+						  'confirm_status' => '2', 
+					  );
+		$this->admin_model->UpdateAdvancePayTbl($c_datas, $ThisUser_rqs);
 	}
 }

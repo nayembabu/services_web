@@ -97,7 +97,7 @@
 				                        '<td>' + data[i].query_name_des + '</td>' +
 				                        '<td>' + fileUploadInputBtn + '</td>' +
 				                        '<td>' + formattedTime + '</td>' +
-				                        '<td>  <button type="button" dataID="'+data[i].requ_uniq_iiiid+'" class="btn btn-success btn-xs SucBtn_ss" title="Success" id="inlineFormCustomSelect" ><i class="fa fa-check"></i> </button>          <button type="button" ThisdataID="'+data[i].requ_uniq_iiiid+'" class="btn btn-danger btn-xs " title="Reject" id="inlineFormCustomSelect" ><i class="fa fa-times"></i> </button>  </td>' +
+				                        '<td>  <button type="button" dataID="'+data[i].requ_uniq_iiiid+'" class="btn btn-success btn-xs SucBtn_ss" title="Success" id="inlineFormCustomSelect" ><i class="fa fa-check"></i> </button>          <button type="button" ThisdataID="'+data[i].requ_uniq_iiiid+'" class="btn btn-danger btn-xs delRequ_Btn" title="Reject" id="inlineFormCustomSelect" ><i class="fa fa-times"></i> </button>  </td>' +
 				                     ' </form></tr>'
         				}
         				$('.listRecords').html(html);
@@ -113,7 +113,7 @@
 		        var UploadThisFile = $(this).parents('.data_tr_row').find('.UpldFileThis');                 
         		var files = $(UploadThisFile)[0].files[0];
         			fd.append('file', files);
-        			 fd.append('id', thisAutoIdd);
+        			fd.append('id', thisAutoIdd);
         			// console.log(fd);
         			$.ajax({
 			            url: 'admin/fileUploadForThisIDD',
@@ -126,6 +126,18 @@
 			            },
 			        });
 
+        	})
+
+        	$(document).on('click', '.delRequ_Btn', function() {
+                var This_Rqs_idd = $(this).attr('ThisdataID');
+        		$.ajax({
+                    url: 'admin/FormReject_s?ThisRqs_iddi='+This_Rqs_idd,
+                    type: 'GET',
+                    data: '',
+                    success: function(response){ 
+                        listRecords();
+                     }
+                });
         	})
         </script>
 

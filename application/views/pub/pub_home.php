@@ -148,6 +148,18 @@ $totalAmnt_s = array_sum($amnt_array);
 
 	var argetRate = 0;
 
+
+	$.ajax({
+		url: 'pub/getServices_Info_s?ser_iidid=1',
+		method: 'GET',
+		data: '',
+		dataType: 'json',
+		success: function (r_data) { 
+			argetRate = r_data.argent_rate;
+		}
+	})
+
+
 	getRequest();
 
 	var nid_slip_form = '<div class="form-row"><div class="form-group col-md-6"><label for="inputEmail4"> Number </label><input type="text" class="form-control slip_numbr" id="inputEmail4" placeholder="Type Number"></div><div class="form-group col-md-6"><label for="inputPassword4"> Birth Date </label><input type="text" class="form-control birth_date_f datePicker" id="inputPassword4" placeholder="Type Birth Date"></div></div><div class="form-group"><label for="inputAddress"> Person Name </label><input type="text" class="form-control persn_name_s" id="inputAddress" placeholder="Type Full Name of Person"></div>';
@@ -220,23 +232,26 @@ $totalAmnt_s = array_sum($amnt_array);
 					}else {
 						UploadTime_f = formattedTimes;
 					}
+					var img_checker = '';
 					var sl = i+1;
 					var stsus = '';
+
+					if (requ_data[i].img_upload_url == null) {
+						img_checker = 'Wait for Processing';
+					}else {
+						img_checker = '<a href="'+requ_data[i].img_upload_url+'" download class="Down_btn" Dta_idRes="'+requ_data[i].requ_uniq_iiiid+'"> Download </a>'
+					}
+
+
 					if (requ_data[i].status == 0) {
 						stsus = 'Waiting';
 					}else if (requ_data[i].status == 1) {
 						stsus = 'Success';
 					}else if (requ_data[i].status == 2) {
 						stsus = 'Reject';
+						img_checker = 'Reject By User';
 					}else {
 						stsus = 'Something Error';
-					}
-
-					var img_checker = '';
-					if (requ_data[i].img_upload_url == null) {
-						img_checker = 'Wait for Processing';
-					}else {
-						img_checker = '<a href="'+requ_data[i].img_upload_url+'" download class="Down_btn" Dta_idRes="'+requ_data[i].requ_uniq_iiiid+'"> Download </a>'
 					}
 
 					full_data += '<tr><td> '+sl+' </td><td> '+requ_data[i].requ_emar_stats+' </td><td> '+requ_data[i].requ_type+' </td><td> '+requ_data[i].query_numbr+' </td><td> '+requ_data[i].query_name_des+' </td><td> '+requ_data[i].requ_birth+' </td><td> '+requesTime_f+' </td><td> '+stsus+' </td><td> '+img_checker+' </td><td> '+UploadTime_f+' </td></tr>';
@@ -267,6 +282,12 @@ $('.services_list_name').change(function() {
 		}
 	})
 })
+
+
+
+
+
+
 
 $(document).on('change', '.services_opt_s', function() {
 	var services_values = $(this).val();
@@ -332,6 +353,7 @@ $(document).on('change', '.services_opt_s', function() {
 
 	$('.search_by_date').click(function() {		
 		getRequest();
+		balanceQuery_s();
 	})
 balanceQuery_s();
 	function balanceQuery_s() {
@@ -345,10 +367,10 @@ balanceQuery_s();
 				var amount_ttl_cost = balance_data.servic_cost;		   	
 		   		now_ttl_balance = amount_ttl_pay - amount_ttl_cost;
 
-		   		if (now_ttl_balance > argetRate) {
+		   		if (argetRate < now_ttl_balance) {
 		   			$('.query_btn_ss').html('<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#requModel">New Request</button>');
 		   		}else {
-		   			$('.query_btn_ss').html(' ');
+		   			$('.query_btn_ss').html('');
 		   		}
 
 		   		$('.now_balance_ss').html(now_ttl_balance);
